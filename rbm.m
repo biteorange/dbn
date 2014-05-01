@@ -79,7 +79,7 @@ for epoch = epoch:maxepoch,
   negvisact = sum(negdata); 
 
 %%%%%%%%% END OF NEGATIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  err= sum(sum( (data-negdata).^2 ));
+  err= sum(sum( (data-negdata).^2 ))
   errsum = err + errsum;
 
    if epoch>5,

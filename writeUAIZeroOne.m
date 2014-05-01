@@ -7,8 +7,11 @@ fprintf(fid, 'MARKOV\n');
 % visbiases = rand(1, numdims);
 
 expvishid = exp(vishid);
+invexpvishid = exp(-vishid);
 exphidbiases = exp(hidbiases);
+invexphid = exp(-hidbiases);
 expvisbiases = exp(visbiases);
+invexpvis = exp(-visbiases);
 
 numNodes = numdims + numhid
 
@@ -43,24 +46,24 @@ fprintf(fid, '\n');
 %%%%%%%%%%% Potentials %%%%%%%%%%%%%%
 for i = 1:numdims
     fprintf(fid, '2\n');
-    norm = 1+expvisbiases(i);
-    fprintf(fid, sprintf('%f %f\n', 1/norm, expvisbiases(i)/norm));
+    norm = invexpvis(i)+expvisbiases(i);
+    fprintf(fid, sprintf('%f %f\n', invexpvis(i)/norm, expvisbiases(i)/norm));
 end
 
 % write for hidden
 for i = 1:numhid
     fprintf(fid, '2\n');
-    norm = 1+exphidbiases(i);
-    fprintf(fid, sprintf('%f %f\n', 1/norm, exphidbiases(i)/norm));
+    norm = invexphid(i)+exphidbiases(i);
+    fprintf(fid, sprintf('%f %f\n', invexphid(i)/norm, exphidbiases(i)/norm));
 end
 
 % write for visible
 for i = 1:numdims
     for j = 1:numhid
-        norm = expvishid(i,j)+3;
+        norm = 2*(expvishid(i,j)+invexpvishid(i,j));
         fprintf(fid, '4\n');
-        fprintf(fid, '%f %f\n', 1/norm, 1/norm);
-        fprintf(fid, sprintf('%f %f\n', 1/norm, expvishid(i,j)/norm));
+        fprintf(fid, '%f %f\n', expvishid(i,j)/norm, invexpvishid(i,j)/norm);
+        fprintf(fid, sprintf('%f %f\n', invexpvishid(i,j)/norm, expvishid(i,j)/norm));
     end
 end
         

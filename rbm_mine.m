@@ -25,9 +25,16 @@
 epsilonw      = 0.1;   % Learning rate for weights 
 epsilonvb     = 0.1;   % Learning rate for biases of visible units 
 epsilonhb     = 0.1;   % Learning rate for biases of hidden units 
-weightcost  = 0.0002;   
+weightcost  = 0.0002;  
 initialmomentum  = 0.5;
 finalmomentum    = 0.9;
+
+epsilonw = 0.01;
+epsilonvb = 0.01;
+epsilonhb = 0.01;
+weightcost = 0;
+initialmomentum = 0.0;
+finalmomentum = 0.0;
 
 [numcases numdims numbatches]=size(batchdata);
 
@@ -55,8 +62,6 @@ if restart ==1,
  Mr = zeros(hidn, visn);
  N = zeros(visn, hidn);
  Nr = zeros(hidn, visn);
- a = visbiases;
- b = hidbiases;
  
   batchposhidprobs=zeros(numcases,numhid,numbatches);
 end
@@ -69,6 +74,7 @@ for epoch = epoch:maxepoch,
 
 %%%%%%%%% START POSITIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   data = batchdata(:,:,batch);
+  
   poshidprobs = 1./(1 + exp(-data*vishid - repmat(hidbiases,numcases,1)));
   % poshiprobs = p(h | v), a matrix with V*H
   batchposhidprobs(:,:,batch)=poshidprobs; % use probability for next layer
@@ -87,12 +93,12 @@ for epoch = epoch:maxepoch,
   bp_inference;
 %   neghidprobs = 1./(1 + exp(-negdata*vishid - repmat(hidbiases,numcases,1)));
 %   % p(h | v_samples)
-%   negprods  = negdata'*neghidprobs;
+%  negprods  = negdata'*neghidprobs;
 %   neghidact = sum(neghidprobs);
 %   negvisact = sum(negdata); 
 
 %%%%%%%%% END OF NEGATIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  err= sum(sum( (data-negdata).^2 ))
+  err= sum(sum( (data-negdata).^2))
   errsum = err + errsum;
 
    if epoch>5,

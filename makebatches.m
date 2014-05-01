@@ -32,9 +32,9 @@ fprintf(1, 'Size of the training dataset= %5d \n', totnum);
 rand('state',0); %so we know the permutation of the training data
 randomorder=randperm(totnum);
 
-numbatches=totnum/100;
-numdims  =  size(digitdata,2);
 batchsize = 100;
+numbatches=totnum/batchsize;
+numdims  =  size(digitdata,2);
 batchdata = zeros(batchsize, numdims, numbatches);
 batchtargets = zeros(batchsize, 10, numbatches);
 

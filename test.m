@@ -11,9 +11,12 @@ fprintf(1,'Pretraining a deep autoencoder. \n');
 fprintf(1,'The Science paper used 50 epochs. This uses %3i \n', maxepoch);
 
 makebatches;
-[numcases numdims numbatches]=size(batchdata);
-restart = 1;
+rbm_file = 'rbm1.txt';
 
-visN = numdims;
-hidN = numhid;
+[numcases numdims numbatches]=size(batchdata);
+visn = numdims;
+hidn = numhid;
+
+restart = 1;
+ 
 rbm_mine;

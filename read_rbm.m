@@ -1,5 +1,5 @@
 file = fopen(rbm_file);
 A = fscanf(file, '%f');
-visbiases = A(1:visN)';
-hidbiases = A(visN+1:visN+hidN)';
-vishid = reshape(A(visN+hidN+1:visN+hidN+visN*hidN), visN, hidN);
+visbiases = A(1:visn)';
+hidbiases = A(visn+1:visn+hidn)';
+vishid = reshape(A(visn+hidn+1:visn+hidn+visn*hidn), visn, hidn);

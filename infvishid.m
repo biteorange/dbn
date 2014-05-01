@@ -1,5 +1,4 @@
 function y = infvishid(a, b, k)
-expa = exp(-a); expb = exp(-b);
-expk = exp(k);
-% y = exp(k)./(exp(k)+exp(-a)+exp(-b)+exp(-a-b));
-y = expk ./ (expk + expa + expb + expa.*expb);
+% inference for p(v=1,h=1)
+y = exp(k+a+b) ./ (1 + exp(k+a+b) + exp(a) + exp(b));
+% y = 1.0 ./ (exp(-a-b-k)+1+exp(-a-k)+exp(-b-k));
