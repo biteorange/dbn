@@ -29,12 +29,12 @@ weightcost  = 0.0002;
 initialmomentum  = 0.5;
 finalmomentum    = 0.9;
 
-epsilonw = 0.01;
-epsilonvb = 0.01;
-epsilonhb = 0.01;
-weightcost = 0;
-initialmomentum = 0.0;
-finalmomentum = 0.0;
+epsilonw = 0.03;
+epsilonvb = 0.03;
+epsilonhb = 0.03;
+weightcost = 0.0002;
+initialmomentum = 0.5;
+finalmomentum = 0.5;
 
 [numcases numdims numbatches]=size(batchdata);
 
@@ -89,13 +89,16 @@ for epoch = epoch:maxepoch,
 %%%%%%%%% START NEGATIVE PHASE  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   negdata = 1./(1 + exp(-poshidstates*vishid' - repmat(visbiases,numcases,1)));
   % CD phrase, negdata = p(v | h_sample), treated as data
-  
-  bp_inference;
-%   neghidprobs = 1./(1 + exp(-negdata*vishid - repmat(hidbiases,numcases,1)));
-%   % p(h | v_samples)
-%  negprods  = negdata'*neghidprobs;
-%   neghidact = sum(neghidprobs);
-%   negvisact = sum(negdata); 
+
+  if batch > 0
+      bp_inference;
+  else
+      neghidprobs = 1./(1 + exp(-negdata*vishid - repmat(hidbiases,numcases,1)));
+      % p(h | v_samples)
+      negprods  = negdata'*neghidprobs;
+      neghidact = sum(neghidprobs);
+      negvisact = sum(negdata); 
+  end
 
 %%%%%%%%% END OF NEGATIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
   err= sum(sum( (data-negdata).^2))

@@ -34,6 +34,7 @@ randomorder=randperm(totnum);
 
 batchsize = 100;
 numbatches=totnum/batchsize;
+numbatches = 60;
 numdims  =  size(digitdata,2);
 batchdata = zeros(batchsize, numdims, numbatches);
 batchtargets = zeros(batchsize, 10, numbatches);

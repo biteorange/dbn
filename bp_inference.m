@@ -11,7 +11,7 @@ start = tic;
 %% bp loop
 alpha = 0;
 [visn, hidn] = size(vishid);
-for i = 1:100
+for i = 1:10
     newM = sumprod(vishid, N);
    
     if max(abs(M(:)-newM(:))) < 1e-4
@@ -20,10 +20,8 @@ for i = 1:100
     end
    
     M = alpha*M + (1-alpha) * newM;
-%     Nr = (repmat(sum(M)+hidbiases, visn, 1) - M)';
     Nr = alpha*Nr + (1-alpha) * bsxfun(@plus, -M', (sum(M)+hidbiases)');    
     Mr = alpha*Mr + (1-alpha) * sumprod(vishid', Nr);
-%     N = (repmat(sum(Mr)+visbiases, hidn, 1) - Mr)';
     N = alpha*N + (1-alpha) * bsxfun(@plus, -Mr', (sum(Mr)+visbiases)');
 end
 
