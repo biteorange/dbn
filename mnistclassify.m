@@ -34,6 +34,7 @@ makebatches;
 
 fprintf(1,'Pretraining Layer 1 with RBM: %d-%d \n',numdims,numhid);
 restart=1;
+rbm_file = 'rbm1.txt';
 rbm_mine;
 hidrecbiases=hidbiases;
 filename = 'rbm1.txt';

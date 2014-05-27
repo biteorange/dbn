@@ -74,7 +74,10 @@ for epoch = epoch:maxepoch,
   % CD phrase, negdata = p(v | h_sample), treated as data
   neghidprobs = 1./(1 + exp(-negdata*vishid - repmat(hidbiases,numcases,1)));
   % p(h | v_samples)
-  negprods  = negdata'*neghidprobs;
+  new_negprods = negdata'*neghidprobs;
+  residual = max(abs(new_negprods(:)-negprods(:)));
+  negprods  = new_negprods;
+  fprintf('residual %f\n', residual/numcases);
   neghidact = sum(neghidprobs);
   negvisact = sum(negdata); 
 

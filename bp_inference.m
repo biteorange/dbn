@@ -1,4 +1,3 @@
-
 start = tic;
 
  visn = numdims;
@@ -11,10 +10,10 @@ start = tic;
 %% bp loop
 alpha = 0;
 [visn, hidn] = size(vishid);
-for i = 1:10
+for i = 1:20
     newM = sumprod(vishid, N);
    
-    if max(abs(M(:)-newM(:))) < 1e-4
+    if max(abs(M(:)-newM(:))) < 1e-3
         fprintf('bp finish in %d\n', i);
         break
     end
@@ -27,10 +26,10 @@ end
 
 %% compute marginals
 negprods_new = numcases * infvishid(N, Nr', vishid);
-% residual = max(abs(negprods_new(:)-negprods(:))) / numcases;
+residual = max(abs(negprods_new(:)-negprods(:))) / numcases;
 negprods = negprods_new;
 
-% fprintf('marginal residual %f\n', residual);
+fprintf('marginal residual %f\n', residual);
 
 negvisact = numcases * 1 ./ (1 + exp(-sum(Mr)-visbiases));
 neghidact = numcases * 1 ./ (1 + exp(-sum(M)-hidbiases));
