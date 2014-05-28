@@ -34,34 +34,11 @@ makebatches;
 
 fprintf(1,'Pretraining Layer 1 with RBM: %d-%d \n',numdims,numhid);
 restart=1;
-rbm_file = 'rbm1.txt';
 rbm;
 hidrecbiases=hidbiases;
-filename = 'rbm1.txt';
 % writeUAI;
 save mnistvhclassify vishid hidrecbiases visbiases;
 
-fprintf(1,'\nPretraining Layer 2 with RBM: %d-%d \n',numhid,numpen);
-batchdata=batchposhidprobs;
-numhid=numpen;
-restart=1;
-rbm;
-hidpen=vishid; penrecbiases=hidbiases; hidgenbiases=visbiases;
 
-filename = 'rbm2.txt';
-% writeUAI;
-save mnisthpclassify hidpen penrecbiases hidgenbiases;
-
-fprintf(1,'\nPretraining Layer 3 with RBM: %d-%d \n',numpen,numpen2);
-batchdata=batchposhidprobs;
-numhid=numpen2;
-restart=1;
-rbm;
-
-filename = 'rbm3.txt';
-% writeUAI;
-hidpen2=vishid; penrecbiases2=hidbiases; hidgenbiases2=visbiases;
-save mnisthp2classify hidpen2 penrecbiases2 hidgenbiases2;
-
-backpropclassify; 
+backprop_classify_rbm; 
 

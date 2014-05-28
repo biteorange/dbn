@@ -29,9 +29,9 @@ weightcost  = 0.0002;
 initialmomentum  = 0.5;
 finalmomentum    = 0.9;
 
-epsilonw = 0.01;
-epsilonvb = 0.01;
-epsilonhb = 0.01;
+epsilonw = 0.02;
+epsilonvb = 0.02;
+epsilonhb = 0.02;
 weightcost = 0.0002;
 initialmomentum = 0.5;
 finalmomentum = 0.5;
@@ -58,10 +58,6 @@ if restart ==1,
  % initialize the messages
  visn = numdims;
  hidn = numhid;
- M = zeros(visn, hidn);
- Mr = zeros(hidn, visn);
- N = zeros(visn, hidn);
- Nr = zeros(hidn, visn);
  
   batchposhidprobs=zeros(numcases,numhid,numbatches);
 end

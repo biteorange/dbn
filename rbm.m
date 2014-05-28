@@ -77,12 +77,12 @@ for epoch = epoch:maxepoch,
   new_negprods = negdata'*neghidprobs;
   residual = max(abs(new_negprods(:)-negprods(:)));
   negprods  = new_negprods;
-  fprintf('residual %f\n', residual/numcases);
+  % fprintf('residual %f\n', residual/numcases);
   neghidact = sum(neghidprobs);
   negvisact = sum(negdata); 
 
 %%%%%%%%% END OF NEGATIVE PHASE %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-  err= sum(sum( (data-negdata).^2 ))
+  err= sum(sum( (data-negdata).^2 ));
   errsum = err + errsum;
 
    if epoch>5,

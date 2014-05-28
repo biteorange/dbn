@@ -1,16 +1,13 @@
 start = tic;
 
- visn = numdims;
- hidn = numhid;
  M = zeros(visn, hidn);
  Mr = zeros(hidn, visn);
  N = zeros(visn, hidn);
  Nr = zeros(hidn, visn);
  
 %% bp loop
-alpha = 0;
-[visn, hidn] = size(vishid);
-for i = 1:20
+alpha = 0.0;
+for i = 1:10
     newM = sumprod(vishid, N);
    
     if max(abs(M(:)-newM(:))) < 1e-3
